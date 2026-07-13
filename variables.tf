@@ -12,19 +12,6 @@ EOT
     hostname_binding_id = string
     ssl_state           = string
   }))
-  # --- Unconfirmed validation candidates, derived from azurerm_app_service_certificate_binding's provider source ---
-  # Not auto-enabled: either a bespoke provider validator we can't safely translate,
-  # or a path that crosses a list-typed block (needs its own for_each wrapping).
-  # Review, translate into a real validation{} block above, and delete once confirmed.
-  # path: hostname_binding_id
-  #   source:    [from webapps.ValidateHostNameBindingID] !ok
-  # path: hostname_binding_id
-  #   source:    [from webapps.ValidateHostNameBindingID] err != nil
-  # path: certificate_id
-  #   source:    [from certificates.ValidateCertificateID] !ok
-  # path: certificate_id
-  #   source:    [from certificates.ValidateCertificateID] err != nil
-  # path: ssl_state
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # Note: 5 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
 }
 
